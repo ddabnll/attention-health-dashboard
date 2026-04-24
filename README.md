@@ -1,4 +1,4 @@
-📊 Attention Health Dashboard 
+Attention Health Dashboard 📊
 An analytical dashboard developed to monitor social media consumption (Reels/Shorts) and its impact on attention span and stress levels. This project was built as part of the Systems Development (ADS) course at ETE.
 
 🚀 Features
