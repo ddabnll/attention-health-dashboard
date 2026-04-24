@@ -7,17 +7,27 @@ import {
 
 const COLORS = ['#6366f1', '#f43f5e', '#10b981', '#f59e0b'];
 const stressMap = { "Low": 1, "Medium": 2, "High": 3 };
+const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:8000';
 
 const App = () => {
   const [rawData, setRawData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [filters, setFilters] = useState({ platform: 'all', intensity: 'all', age: 'all' });
 
   useEffect(() => {
     setLoading(true);
-    axios.get('http://127.0.0.1:8000/api/dados-consumo/')
-      .then(res => { setRawData(res.data); setLoading(false); })
-      .catch(err => { console.error(err); setLoading(false); });
+    setError(null);
+    axios.get(`${API_URL}/api/dados-consumo/`)
+      .then(res => { 
+        setRawData(res.data); 
+        setLoading(false); 
+      })
+      .catch(err => { 
+        console.error('Error fetching data:', err); 
+        setError('Falha ao carregar dados. Verifique se o backend está rodando.');
+        setLoading(false); 
+      });
   }, []);
 
   const filteredData = useMemo(() => {
@@ -93,6 +103,8 @@ const App = () => {
   };
 
   if (loading) return <div style={{textAlign:'center', color:'#818cf8', marginTop:'20%'}}>Loading Dashboard Data...</div>;
+  
+  if (error) return <div style={{textAlign:'center', color:'#f43f5e', marginTop:'20%'}}>{error}</div>;
 
   return (
     <div style={styles.container}>
@@ -139,27 +151,27 @@ const App = () => {
       <div style={styles.mainGrid}>
         <div style={styles.card}>
           <h4 style={{marginBottom: '20px', fontSize: '16px', fontWeight: '500'}}>Usage by Platform</h4>
-          <div style={{flex: 1}}><ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={chartData.platforms} innerRadius={55} outerRadius={75} dataKey="value" paddingAngle={5}>{chartData.platforms.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}</Pie><Tooltip /><Legend /></PieChart></ResponsiveContainer></div>
+          <div style={{flex: 1}}><ResponsiveContainer width="100%" height="100%"><PieChart><Pie data={chartData.platforms} innerRadius={55} outerRadius={75} dataKey="value" paddingAngle={5}>{chartData.platforms.map((entry, index) => (<Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />))}</Pie><Tooltip /></PieChart></ResponsiveContainer></div>
         </div>
 
         <div style={styles.card}>
           <h4 style={{marginBottom: '20px', fontSize: '16px', fontWeight: '500'}}>Average Focus by Screen Time</h4>
-          <div style={{flex: 1}}><ResponsiveContainer width="100%" height="100%"><LineChart data={chartData.screenMetrics}><CartesianGrid stroke="#334155" vertical={false} /><XAxis dataKey="range" stroke="#94a3b8" fontSize={12} label={{ value: 'Daily Usage', position: 'insideBottom', offset: -5, fill: '#64748b', fontSize: 10 }} /><YAxis domain={[0, 10]} stroke="#94a3b8" fontSize={12} /><Tooltip contentStyle={{backgroundColor: '#1e293b', border: '1px solid #334155'}} /><Line name="Focus Level" type="monotone" dataKey="focus" stroke="#10b981" strokeWidth={3} dot={{r:4}} /></LineChart></ResponsiveContainer></div>
+          <div style={{flex: 1}}><ResponsiveContainer width="100%" height="100%"><LineChart data={chartData.screenMetrics}><CartesianGrid stroke="#334155" vertical={false} /><XAxis dataKey="range" stroke="#94a3b8" /><YAxis stroke="#94a3b8" /><Tooltip /><Line type="monotone" dataKey="focus" stroke="#10b981" strokeWidth={2} /></LineChart></ResponsiveContainer></div>
         </div>
 
         <div style={styles.card}>
           <h4 style={{marginBottom: '20px', fontSize: '16px', fontWeight: '500'}}>Completion Rate by Screen Time</h4>
-          <div style={{flex: 1}}><ResponsiveContainer width="100%" height="100%"><BarChart data={chartData.screenMetrics}><CartesianGrid stroke="#334155" vertical={false} /><XAxis dataKey="range" stroke="#94a3b8" fontSize={12} /><YAxis stroke="#94a3b8" fontSize={12} unit="%" /><Tooltip cursor={{fill:'#334155', opacity: 0.4}} /><Bar name="Completion" dataKey="completion" fill="#6366f1" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></div>
+          <div style={{flex: 1}}><ResponsiveContainer width="100%" height="100%"><BarChart data={chartData.screenMetrics}><CartesianGrid stroke="#334155" vertical={false} /><XAxis dataKey="range" stroke="#94a3b8" /><YAxis stroke="#94a3b8" /><Tooltip /><Bar dataKey="completion" fill="#6366f1" /></BarChart></ResponsiveContainer></div>
         </div>
 
         <div style={styles.card}>
           <h4 style={{marginBottom: '20px', fontSize: '16px', fontWeight: '500'}}>Average Stress Level</h4>
-          <div style={{flex: 1}}><ResponsiveContainer width="100%" height="100%"><BarChart layout="vertical" data={chartData.stressPlat}><XAxis type="number" domain={[0, 3]} stroke="#94a3b8" hide /><YAxis dataKey="name" type="category" stroke="#f8fafc" width={100} fontSize={12} /><Tooltip /><Bar name="Stress Level" dataKey="stress" fill="#f43f5e" radius={[0,4,4,0]} barSize={25} /></BarChart></ResponsiveContainer></div>
+          <div style={{flex: 1}}><ResponsiveContainer width="100%" height="100%"><BarChart layout="vertical" data={chartData.stressPlat}><XAxis type="number" domain={[0, 3]} stroke="#94a3b8" hide={false} /><YAxis dataKey="name" type="category" stroke="#94a3b8" /><Tooltip /><Bar dataKey="stress" fill="#f43f5e" /></BarChart></ResponsiveContainer></div>
         </div>
 
         <div style={styles.card}>
           <h4 style={{marginBottom: '20px', fontSize: '16px', fontWeight: '500'}}>Screen Time vs Completion Rate</h4>
-          <div style={{flex: 1}}><ResponsiveContainer width="100%" height="100%"><ComposedChart data={chartData.scatterRaw} margin={{left: -20}}><CartesianGrid stroke="#334155" strokeDasharray="3 3" /><XAxis dataKey="x" type="number" stroke="#94a3b8" fontSize={11} unit="h" /><YAxis stroke="#94a3b8" fontSize={11} unit="%" /><Tooltip /><Scatter name="User Data" dataKey="y" fill="#f59e0b" /><Line name="Trendline" dataKey="y" stroke="#ffffff" strokeWidth={1} dot={false} opacity={0.3} /></ComposedChart></ResponsiveContainer></div>
+          <div style={{flex: 1}}><ResponsiveContainer width="100%" height="100%"><ComposedChart data={chartData.scatterRaw} margin={{left: -20}}><CartesianGrid stroke="#334155" strokeDasharray="3 3" /><XAxis dataKey="x" stroke="#94a3b8" /><YAxis stroke="#94a3b8" /><Tooltip /><Scatter dataKey="y" fill="#f59e0b" /></ComposedChart></ResponsiveContainer></div>
         </div>
 
         <div style={{...styles.card, border: '2px solid #6366f1'}}>
