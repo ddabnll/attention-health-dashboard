@@ -1,58 +1,43 @@
-# Attention Health Dashboard 📊
+# Attention Health Dashboard
 
-An analytical dashboard developed to monitor social media consumption (Reels/Shorts) and its impact on attention span and stress levels. This project was built as part of the Systems Development (ADS) course at ETE.
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 
-## 🚀 Features
+An interactive data visualization platform developed by Daniel Bonilla to analyze the correlation between digital consumption habits and mental health indicators such as focus, sleep quality, and stress levels. This project was built as part of the Systems Development (ADS) course at ETE.
 
-- **Data-Driven Insights:** Analyzes metrics like watch time, age, and focus scores.
-- **Automated Data Pipeline:** Custom Python script to fetch and import datasets directly from Kaggle.
-- **Modern Tech Stack:** Django REST Framework (Backend) and React (Frontend).
+## Project Preview
+![Dashboard Screenshot](.assets/printdashboard.png)
 
-## 🛠️ Tech Stack
+## Key Features
+- Multi-Dimensional Data Analysis: Features 5 distinct chart types including Pie, Line, Bar, and Scatter plots to cover various KPIs.
+- Advanced Correlation Logic: Includes a Scatter Plot with an integrated Linear Regression Trendline to visualize how screen time impacts attention spans.
+- Dynamic Real-time Filtering: Users can toggle between platforms (Instagram, TikTok, YouTube) with instant UI updates via React hooks.
+- Automated Insights Module: A custom-built carousel component that calculates and cycles through key statistical takeaways every 5 seconds.
+- Modular Component Architecture: Clean and organized React structure using reusable components for Cards, Charts, and KPIs.
 
-- **Backend:** Python, Django, Django REST Framework
-- **Frontend:** React.js
-- **Database:** SQLite (Development)
-- **Data Tools:** Pandas, KaggleHub
+## Tech Stack
+- Frontend: React.js (Hooks, Axios, Chart.js)
+- Backend: Django REST Framework (Python)
+- Database: SQLite (Dev) / PostgreSQL (Prod)
+- UI/UX: Responsive Dark Mode Grid Layout
 
-## 📦 Installation & Setup
+## Installation and Setup
 
-### 1. Clone the repository
-
+1. Clone the repository:
 git clone https://github.com/ddabnll/attention-health-dashboard.git
-cd Desafio
 
-### 2. Backend Setup (Django)
-
-Go to the backend folder and install the dependencies:
-
+2. Backend Configuration:
 cd backend
-pip install django djangorestframework django-cors-headers pandas kagglehub
-
-Run the migrations to set up the database:
-
+pip install -r requirements.txt
 python manage.py migrate
-
-### 3. Import Data
-
-To populate the database with the latest dataset from Kaggle, run:
-
-python import_data.py
-
-### 4. Run the Servers
-
-**Terminal 1 (Backend):**
 python manage.py runserver
 
-**Terminal 2 (Frontend):**
-cd dashboard-consumo
+3. Frontend Configuration:
+cd frontend
 npm install
 npm start
 
-## 📬 API Endpoints
-
-- **GET** /api/dados-consumo/ - Returns the full list of consumption data.
-
-## 👤 Author
-
-**Daniel Bonilla** - Systems Development Student at ETEPD.
+## License
+This project is under the MIT License.

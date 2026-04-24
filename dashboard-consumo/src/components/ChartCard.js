@@ -1,18 +1,19 @@
 import React from 'react';
 
-const ChartCard = ({ title, children }) => {
-  return (
-    <div className="chart-card" style={{ 
-      backgroundColor: '#fff', 
-      padding: '20px', 
-      borderRadius: '12px', 
-      boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-      marginBottom: '20px'
-    }}>
-      <h3 style={{ marginBottom: '15px', color: '#333' }}>{title}</h3>
+const ChartCard = ({ title, children }) => (
+  <div style={{ 
+    backgroundColor: '#1e293b', 
+    padding: '24px', 
+    borderRadius: '16px', 
+    border: '1px solid #334155',
+    display: 'flex',
+    flexDirection: 'column'
+  }}>
+    <h3 style={{ color: '#94a3b8', marginBottom: '20px', fontSize: '14px', textTransform: 'uppercase' }}>{title}</h3>
+    <div style={{ height: '250px', width: '100%', position: 'relative' }}>
       {children}
     </div>
-  );
-};
+  </div>
+);
 
 export default ChartCard;

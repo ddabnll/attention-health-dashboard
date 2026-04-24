@@ -32,51 +32,55 @@ const FilterBar = ({ filters, onFilterChange }) => {
     },
   };
 
-  const handleSelectChange = (filterName, value) => {
-    onFilterChange({
-      ...filters,
-      [filterName]: value,
-    });
-  };
+// ... seus estilos continuam iguais lá em cima ...
 
-  return (
-    <div style={styles.container}>
-      <h2 style={styles.title}>Attention Health Dashboard</h2>
-
-      <select
-        style={styles.select}
-        value={filters.platform}
-        onChange={(e) => handleSelectChange('platform', e.target.value)}
-      >
-        <option value="all">All Platforms</option>
-        <option value="Instagram Reels">Instagram</option>
-        <option value="TikTok">TikTok</option>
-        <option value="YouTube Shorts">YouTube</option>
-      </select>
-
-      <select
-        style={styles.select}
-        value={filters.age}
-        onChange={(e) => handleSelectChange('age', e.target.value)}
-      >
-        <option value="all">All Age Groups</option>
-        <option value="young">Under 18</option>
-        <option value="young_adult">19-28 Years</option>
-        <option value="adult">28+ Years</option>
-      </select>
-
-      <select
-        style={styles.select}
-        value={filters.intensity}
-        onChange={(e) => handleSelectChange('intensity', e.target.value)}
-      >
-        <option value="all">All Usage Levels</option>
-        <option value="low">Low (&lt; 4h)</option>
-        <option value="medium">Medium (4-8h)</option>
-        <option value="high">High (&gt; 8h)</option>
-      </select>
-    </div>
-  );
+const handleSelectChange = (filterName, value) => {
+  onFilterChange({
+    ...filters,
+    [filterName]: value,
+  });
 };
 
+// Adicionamos uma segurança: se filters for undefined, usamos um objeto vazio {}
+const safeFilters = filters || {};
+
+return (
+  <div style={styles.container}>
+    <h2 style={styles.title}>Attention Health Dashboard</h2>
+
+    <select
+      style={styles.select}
+      value={safeFilters.platform || 'all'} // Usa 'all' se estiver indefinido
+      onChange={(e) => handleSelectChange('platform', e.target.value)}
+    >
+      <option value="all">All Platforms</option>
+      <option value="Instagram Reels">Instagram</option>
+      <option value="TikTok">TikTok</option>
+      <option value="YouTube Shorts">YouTube</option>
+    </select>
+
+    <select
+      style={styles.select}
+      value={safeFilters.age || 'all'}
+      onChange={(e) => handleSelectChange('age', e.target.value)}
+    >
+      <option value="all">All Age Groups</option>
+      <option value="young">Under 18</option>
+      <option value="young_adult">19-28 Years</option>
+      <option value="adult">28+ Years</option>
+    </select>
+
+    <select
+      style={styles.select}
+      value={safeFilters.intensity || 'all'}
+      onChange={(e) => handleSelectChange('intensity', e.target.value)}
+    >
+      <option value="all">All Usage Levels</option>
+      <option value="low">Low (&lt; 4h)</option>
+      <option value="medium">Medium (4-8h)</option>
+      <option value="high">High (&gt; 8h)</option>
+    </select>
+  </div>
+);
+};
 export default FilterBar;
