@@ -1,55 +1,58 @@
-Attention Health Dashboard 📊
+# Attention Health Dashboard 📊
+
 An analytical dashboard developed to monitor social media consumption (Reels/Shorts) and its impact on attention span and stress levels. This project was built as part of the Systems Development (ADS) course at ETE.
 
-🚀 Features
-Data-Driven Insights: Analyzes metrics like watch time, age, and focus scores.
+## 🚀 Features
 
-Automated Data Pipeline: Custom Python script to fetch and import datasets directly from Kaggle.
+- **Data-Driven Insights:** Analyzes metrics like watch time, age, and focus scores.
+- **Automated Data Pipeline:** Custom Python script to fetch and import datasets directly from Kaggle.
+- **Modern Tech Stack:** Django REST Framework (Backend) and React (Frontend).
 
-Modern Tech Stack: Django REST Framework (Backend) and React (Frontend).
+## 🛠️ Tech Stack
 
-🛠️ Tech Stack
-Backend: Python, Django, Django REST Framework
+- **Backend:** Python, Django, Django REST Framework
+- **Frontend:** React.js
+- **Database:** SQLite (Development)
+- **Data Tools:** Pandas, KaggleHub
 
-Frontend: React.js
+## 📦 Installation & Setup
 
-Database: SQLite (Development)
+### 1. Clone the repository
 
-Data Tools: Pandas, KaggleHub
-
-📦 Installation & Setup
-1. Clone the repository
 git clone https://github.com/ddabnll/attention-health-dashboard.git
-
 cd Desafio
 
-2. Backend Setup (Django)
+### 2. Backend Setup (Django)
+
 Go to the backend folder and install the dependencies:
 
 cd backend
-
 pip install django djangorestframework django-cors-headers pandas kagglehub
 
 Run the migrations to set up the database:
 
 python manage.py migrate
 
-3. Import Data
+### 3. Import Data
+
 To populate the database with the latest dataset from Kaggle, run:
 
 python import_data.py
 
-4. Run the Servers
-Terminal 1 (Backend): python manage.py runserver
+### 4. Run the Servers
 
-Terminal 2 (Frontend): cd dashboard-consumo
+**Terminal 1 (Backend):**
+python manage.py runserver
 
+**Terminal 2 (Frontend):**
+cd dashboard-consumo
 npm install
-
 npm start
 
-📬 API Endpoints
-GET /api/dados-consumo/ - Returns the full list of consumption data.
+## 📬 API Endpoints
 
-👤 Author
-Daniel Bonilla - Systems Development Student at ETEPD.
+- **GET** /api/dados-consumo/ - Returns the full list of consumption data.
+
+## 👤 Author
+
+**Daniel Bonilla** - Systems Development Student at ETEPD.
