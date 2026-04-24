@@ -58,4 +58,4 @@ npm start
 GET /api/dados-consumo/ - Returns the full list of consumption data.
 
 👤 Author
-Daniel Bonilla - Systems Development Student at ETEPD.
+Daniel Bonilla - Systems Development Student at ETE.
