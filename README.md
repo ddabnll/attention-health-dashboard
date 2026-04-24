@@ -40,15 +40,9 @@ To populate the database with the latest dataset from Kaggle, run:
 python import_data.py
 
 4. Run the Servers
-In one terminal, start the Django server:
+Terminal 1 (Backend): python manage.py runserver
 
-python manage.py runserver
-
-In a second terminal, go to the dashboard-consumo folder and start React:
-
-cd ..
-
-cd dashboard-consumo
+Terminal 2 (Frontend): cd dashboard-consumo
 
 npm install
 
@@ -58,4 +52,4 @@ npm start
 GET /api/dados-consumo/ - Returns the full list of consumption data.
 
 👤 Author
-Daniel Bonilla - Systems Development Student at ETE.
+Daniel Bonilla - Systems Development Student at ETEPD.
