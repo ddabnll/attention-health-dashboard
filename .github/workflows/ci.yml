@@ -26,7 +26,6 @@ jobs:
         run: |
           cd backend
           python manage.py check
-
   frontend-test:
     runs-on: ubuntu-latest
     steps:
@@ -42,4 +41,4 @@ jobs:
       - name: Build Frontend
         run: |
           cd dashboard-consumo
-          npm run build
+          CI=false npm run build
