@@ -7,7 +7,7 @@ import pandas as pd
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'core.settings')
 django.setup()
 
-from consumo.models import DadosConsumo
+from api.models import DadosConsumo
 
 def carregar_dados():
     print("Iniciando download do dataset via KaggleHub...")

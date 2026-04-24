@@ -2,6 +2,10 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from pathlib import Path
+
+# Adiciona a pasta 'backend' ao caminho de busca do Python
+sys.path.append(str(Path(__file__).resolve().parent))
 
 
 def main():
