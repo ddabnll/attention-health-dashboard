@@ -8,7 +8,7 @@
 An interactive data visualization platform developed by Daniel Bonilla to analyze the correlation between digital consumption habits and mental health indicators such as focus, sleep quality, and stress levels. This project was built as part of the Systems Development (ADS) course at ETE.
 
 ## Project Preview
-![Dashboard Screenshot](.assets/printdashboard.png)
+![Dashboard Screenshot](assets/printdashboard.png)
 
 ## Key Features
 - Multi-Dimensional Data Analysis: Features 5 distinct chart types including Pie, Line, Bar, and Scatter plots to cover various KPIs.
