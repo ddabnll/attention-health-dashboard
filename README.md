@@ -5,7 +5,7 @@
 ![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)
 
-An interactive data visualization platform developed by Daniel Bonilla to analyze the correlation between digital consumption habits and mental health indicators such as focus, sleep quality, and stress levels. This project was built as part of the Systems Development (ADS) course at ETE.
+An interactive data visualization platform developed by Daniel Bonilla to analyze the correlation between digital consumption habits and mental health indicators such as focus, sleep quality, and stress levels. Built as part of a technical challenge focused on full-stack development and data visualization.
 
 ## Project Preview
 ![Dashboard Screenshot](assets/printdashboard.png)
